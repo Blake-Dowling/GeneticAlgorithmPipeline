@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 POP_SIZE = 100
-MAX_GENERATIONS = 1000
+MAX_GENERATIONS = 100
 GENE_RANGE = (-5.12, 5.12)
 NUM_DIMENSIONS = 2
 CROSSOVER_RATE = 0.8
@@ -13,12 +13,14 @@ def de_jongs_f1(x):
 
 class GeneticAlgorithm:
     def __init__(self, fitness_function, pop_size, crossover_rate, mutation_rate):
-        self.history = []
-        self.generations = 0
+
         self.fitness_function = fitness_function
         self.pop_size = pop_size
         self.crossover_rate = crossover_rate
         self.mutation_rate = mutation_rate
+
+        self.history = []
+        self.generations = 0
         self.population = self.init_population()
     def init_population(self):
         return np.random.uniform(GENE_RANGE[0], GENE_RANGE[1], (self.pop_size, NUM_DIMENSIONS))
@@ -83,5 +85,5 @@ class GeneticAlgorithm:
         print(f"Best solution found: x = {overall_best_solution}")
         print(f"Minimum F1 value found: {overall_best_objective:.6f}")
         print(f"Target minimum: 0.0 at (0, 0)")
-        return self.history
+        return overall_best_solution
 
